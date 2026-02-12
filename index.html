@@ -3,203 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amelia Vajillas Vintage</title>
+    <title>Amelia | Alquiler de Vajilla</title>
+    <!-- Importamos fuentes elegantes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
     <style>
         /* ========================================
-           VARIABLES DE CONFIGURACIÓN
+           VARIABLES DE DISEÑO (BOUTIQUE)
            ======================================== */
         :root {
-            --color-primary: #8b7355;
-            --color-primary-dark: #6b5d52;
-            --color-accent: #d4af37;
-            --whatsapp-number: '5493874567890'; 
-            --instagram-user: 'ameliavajillas';
+            /* Paleta "Old Rose & Bordeaux" */
+            --bg-body: #fcf6f5; /* Un blanco rosado muy suave */
+            --bg-header: #fcf6f5; /* Mismo tono que el fondo del logo claro */
+            
+            --color-primary: #5d3333; /* Bordeaux/Vino */
+            --color-secondary: #8b5a5a; /* Rosado viejo oscuro */
+            --color-accent: #cca43b; /* Oro viejo */
+            --color-text: #4a4a4a;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+            
+            --whatsapp-number: '5493876138496'; 
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Georgia', serif;
-            color: #333;
-            line-height: 1.6;
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background-color: var(--bg-body);
+            line-height: 1.8;
             overflow-x: hidden;
-            padding-bottom: 80px; /* Espacio extra para los botones flotantes en móvil */
+            padding-bottom: 80px;
         }
 
-        /* Header */
+        /* ========================================
+           HEADER & NAV (Estilo Centrado)
+           ======================================== */
         header {
-            background: linear-gradient(135deg, #8b7355 0%, #6b5d52 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
+            background-color: var(--bg-header);
+            padding: 1rem 0 0.5rem;
+            position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(93, 51, 51, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Logo en Header - Ajustado para mezclar el JPG */
+        .logo-img {
+            height: 120px; /* Tamaño generoso */
+            object-fit: contain;
+            /* mix-blend-mode: multiply; Truco opcional si el fondo no es exacto */
+            margin-bottom: 0.5rem;
         }
 
         nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            width: 100%;
+            padding: 1rem 2rem;
+            border-top: 1px solid rgba(93, 51, 51, 0.1);
+            margin-top: 0.5rem;
         }
 
-        .logo { font-size: 1.8rem; font-weight: bold; letter-spacing: 2px; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
-        .nav-links a:hover { opacity: 0.8; }
+        .nav-links { 
+            display: flex; 
+            justify-content: center; 
+            gap: 3rem; 
+            list-style: none; 
+        }
 
-        /* Hero Section */
+        .nav-links a { 
+            color: var(--color-primary); 
+            text-decoration: none; 
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 50%;
+            background-color: var(--color-accent);
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* ========================================
+           HERO SECTION (Minimalista)
+           ======================================== */
         .hero {
-            margin-top: 70px;
-            background: linear-gradient(rgba(139, 115, 85, 0.85), rgba(107, 93, 82, 0.9)), 
-                        url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"%3E%3Cdefs%3E%3ClinearGradient id="marble" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23f5f3ef;stop-opacity:1" /%3E%3Cstop offset="50%25" style="stop-color:%23ebe8e1;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%23d9d4cc;stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill="url(%23marble)" width="1200" height="800"/%3E%3Cpath d="M0,200 Q300,250 600,200 T1200,200" fill="none" stroke="%23c9c3ba" stroke-width="2" opacity="0.3"/%3E%3Cpath d="M0,400 Q400,350 800,400 T1200,400" fill="none" stroke="%23c9c3ba" stroke-width="2" opacity="0.3"/%3E%3Cpath d="M200,0 Q250,300 200,600 T200,800" fill="none" stroke="%23c9c3ba" stroke-width="2" opacity="0.2"/%3E%3Cpath d="M800,0 Q750,300 800,600 T800,800" fill="none" stroke="%23c9c3ba" stroke-width="2" opacity="0.2"/%3E%3C/svg%3E');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 8rem 2rem 6rem;
+            position: relative;
+            padding: 6rem 2rem 4rem;
             text-align: center;
+            background: linear-gradient(to bottom, var(--bg-body) 0%, #f3e5e5 100%);
         }
 
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .hero p { font-size: 1.3rem; max-width: 700px; margin: 0 auto 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .hero h1 { 
+            font-family: var(--font-heading);
+            font-size: 3.5rem; 
+            color: var(--color-primary);
+            margin-bottom: 1.5rem; 
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .hero p { 
+            font-size: 1.2rem; 
+            max-width: 600px; 
+            margin: 0 auto 3rem; 
+            color: var(--color-secondary);
+            font-weight: 300;
+        }
+
         .cta-button {
-            display: inline-block; padding: 1rem 2.5rem; background: white; color: #8b7355;
-            text-decoration: none; border-radius: 50px; font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: inline-block; 
+            padding: 1rem 3.5rem; 
+            background-color: var(--color-primary); 
+            color: #fff;
+            text-decoration: none; 
+            border-radius: 4px; /* Más elegante que el redondo total */
+            font-family: var(--font-heading);
+            letter-spacing: 1px;
+            font-style: italic;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(93, 51, 51, 0.2);
         }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
 
-        /* Carousel Section */
-        .carousel-section { padding: 0; background: linear-gradient(135deg, #f5f3ef 0%, #ebe8e1 100%); }
-        .section-title { text-align: center; font-size: 2.5rem; padding: 3rem 1rem 1rem; margin-bottom: 0; color: #8b7355; }
+        .cta-button:hover { 
+            background-color: var(--color-secondary); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(93, 51, 51, 0.3);
+        }
+
+        /* ========================================
+           CAROUSEL (Refinado)
+           ======================================== */
+        .carousel-section { 
+            padding: 4rem 0; 
+            background: #fff;
+        }
+        
+        .section-title { 
+            text-align: center; 
+            font-family: var(--font-heading);
+            font-size: 2.5rem; 
+            padding: 0 1rem 3rem; 
+            color: var(--color-primary); 
+            font-weight: 400;
+        }
 
         .carousel-container {
             width: 100%;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        .carousel-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-wrapper { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .carousel-item { min-width: 100%; position: relative; }
 
-        /* --- MEJORA: IMAGEN MÁS GRANDE EN MÓVIL (70vh) --- */
         .carousel-item img {
             width: 100%;
-            height: 70vh; /* Ocupa el 70% de la altura del celular */
+            height: 70vh; 
             object-fit: cover;
             display: block;
+            filter: brightness(0.95); /* Un toque sutil para que no brille tanto */
         }
 
+        /* Caption estilo revista */
         .carousel-caption {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            color: white; padding: 4rem 2rem 3rem; /* Más padding arriba para degradado suave */
+            position: absolute; 
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(68, 30, 30, 0.9));
+            color: white; 
+            padding: 6rem 2rem 4rem;
+            text-align: center;
         }
-        .carousel-caption h3 { font-size: 2rem; margin-bottom: 0.5rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
-        .carousel-caption p { font-size: 1.1rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        
+        .carousel-caption h3 { 
+            font-family: var(--font-heading);
+            font-size: 2.2rem; 
+            margin-bottom: 0.5rem; 
+            font-style: italic;
+        }
+        
+        .carousel-caption p { 
+            font-family: var(--font-body);
+            font-size: 1rem; 
+            opacity: 0.9;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
 
-        /* Botones del Carrusel */
+        /* Controles Minimalistas */
         .carousel-controls {
-            position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between;
-            transform: translateY(-50%); padding: 0 1rem; pointer-events: none;
+            position: absolute; top: 50%; width: 100%; 
+            display: flex; justify-content: space-between;
+            transform: translateY(-50%); padding: 0 2rem; pointer-events: none;
         }
+        
         .carousel-button {
-            pointer-events: auto; background: rgba(255,255,255,0.7); border: none; width: 50px; height: 50px;
-            border-radius: 50%; cursor: pointer; font-size: 1.5rem; color: #8b7355; transition: all 0.3s;
+            pointer-events: auto; 
+            background: rgba(255,255,255,0.1); 
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+            width: 50px; height: 50px;
+            border-radius: 50%; cursor: pointer; 
+            color: #fff; 
+            font-size: 1.2rem;
+            transition: all 0.3s;
             display: flex; align-items: center; justify-content: center;
         }
-        .carousel-button:hover { background: white; transform: scale(1.1); }
+        
+        .carousel-button:hover { background: #fff; color: var(--color-primary); }
 
-        .carousel-dots { text-align: center; padding: 1rem 0 3rem; }
+        .carousel-dots { text-align: center; padding: 2rem 0; }
         .dot {
-            display: inline-block; width: 12px; height: 12px; border-radius: 50%;
-            background: #ccc; margin: 0 5px; cursor: pointer; transition: all 0.3s;
+            display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+            border: 1px solid var(--color-primary);
+            background: transparent; margin: 0 8px; cursor: pointer; transition: all 0.3s;
         }
-        .dot.active { background: #8b7355; transform: scale(1.3); }
+        .dot.active { background: var(--color-primary); transform: scale(1.2); }
 
         /* ========================================
-           BOTONES FLOTANTES (REDES) - NUEVO
+           RESEÑAS (Grid Elegante)
+           ======================================== */
+        .reviews-section { 
+            padding: 6rem 2rem; 
+            background-color: var(--bg-body); 
+        }
+
+        .reviews-grid {
+            max-width: 1100px; 
+            margin: 0 auto; 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 2.5rem;
+        }
+
+        .review-card {
+            background: #fff; 
+            padding: 2.5rem; 
+            border: 1px solid rgba(93, 51, 51, 0.05); /* Borde sutil */
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(93, 51, 51, 0.03); 
+            transition: transform 0.4s;
+            text-align: center;
+        }
+
+        .review-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(93, 51, 51, 0.08); }
+
+        .review-header { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            margin-bottom: 1.5rem; 
+        }
+
+        .review-avatar {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--color-secondary);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-family: var(--font-heading); font-size: 1.4rem; 
+            margin-bottom: 1rem;
+        }
+
+        .review-info h4 { font-family: var(--font-heading); color: var(--color-primary); font-size: 1.2rem; margin-bottom: 0.2rem;}
+        .review-stars { color: var(--color-accent); font-size: 0.9rem; letter-spacing: 2px; }
+        .review-text { color: #666; font-style: italic; font-size: 0.95rem; }
+
+        /* ========================================
+           FOOTER (Negro para Logo Oscuro)
+           ======================================== */
+        footer { 
+            background: #000; /* Fondo negro para que el logo se mezcle */
+            color: rgba(255,255,255,0.7); 
+            text-align: center; 
+            padding: 4rem 2rem 2rem; 
+        }
+        
+        .footer-logo {
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .footer-contact p { margin-bottom: 0.5rem; font-weight: 300; letter-spacing: 0.5px; }
+
+        /* ========================================
+           BOTONES FLOTANTES
            ======================================== */
         .floating-buttons {
             position: fixed; bottom: 20px; right: 20px; z-index: 2000;
-            display: flex; flex-direction: column; gap: 15px;
+            display: flex; flex-direction: column; gap: 12px;
         }
         .float-btn {
-            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; text-decoration: none;
+            width: 55px; height: 55px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s;
         }
         .float-btn:hover { transform: scale(1.1); }
-        .float-btn svg { width: 32px; height: 32px; fill: white; }
+        .float-btn svg { width: 28px; height: 28px; fill: white; }
         .btn-whatsapp { background-color: #25D366; }
         .btn-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
 
-        /* Reviews Section */
-        .reviews-section { padding: 5rem 2rem; background: linear-gradient(135deg, #faf9f7 0%, #f0ede8 100%); }
-        .reviews-grid {
-            max-width: 1200px; margin: 0 auto; display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
-        }
-        .review-card {
-            background: white; padding: 2rem; border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s;
-        }
-        .review-card:hover { transform: translateY(-5px); }
-        .review-header { display: flex; align-items: center; margin-bottom: 1rem; }
-        .review-avatar {
-            width: 60px; height: 60px; border-radius: 50%;
-            background: linear-gradient(135deg, #8b7355 0%, #6b5d52 100%);
-            display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.5rem; font-weight: bold; margin-right: 1rem;
-        }
-        .review-stars { color: #ffd700; font-size: 1.1rem; margin-left: auto; }
-        .review-text { color: #666; font-style: italic; line-height: 1.8; }
-
-        /* Footer */
-        footer { background: #333; color: white; text-align: center; padding: 3rem 2rem 6rem; }
-        .social-links { margin-top: 1rem; }
-        .social-links a { color: white; margin: 0 1rem; text-decoration: none; }
-
         /* Responsive */
-        @media (min-width: 1025px) {
-            .carousel-item img { height: 700px; /* Altura fija en escritorio para no ocupar toda la pantalla */ }
-            .carousel-caption { width: 50%; background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); height: 100%; display: flex; flex-direction: column; justify-content: center; }
-        }
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Menú simplificado */
+            .nav-links { display: none; } /* Ocultamos menú en móvil por simplicidad en este ejemplo */
+            .logo-img { height: 90px; }
             .hero h1 { font-size: 2.5rem; }
-            .carousel-button { width: 40px; height: 40px; font-size: 1.2rem; }
+            .carousel-item img { height: 60vh; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Header con Logo Claro -->
     <header>
-        <nav>
-            <div class="logo">AMELIA VAJILLAS</div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#vajillas">Vajillas</a></li>
-                <li><a href="#reseñas">Reseñas</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
+        <div class="header-container">
+            <!-- NOTA: Asegúrate de que el nombre del archivo coincida exactamente -->
+            <img src="logo.png" alt="Amelia Logo" class="logo-img">
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#vajillas">Colecciones</a></li>
+                    <li><a href="#reseñas">Experiencias</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
+    <!-- Hero Section -->
     <section id="inicio" class="hero">
-        <h1>Amelia Vajillas</h1>
-        <p>Vajillas vintage elegantes y manteles de lujo para hacer de tu evento una experiencia inolvidable.</p>
-        <a href="#vajillas" class="cta-button">Ver Colección</a>
+        <h1>Arte en tu Mesa</h1>
+        <p>Alquiler de vajillas vintage y mantelería de autor. Creamos atmósferas únicas para momentos inolvidables.</p>
+        <a href="#vajillas" class="cta-button">Ver Catálogo</a>
     </section>
 
+    <!-- Carousel Section -->
     <section id="vajillas" class="carousel-section">
-        <h2 class="section-title">Nuestra Colección</h2>
+        <h2 class="section-title">Nuestras Colecciones</h2>
         <div class="carousel-container">
             <div class="carousel-wrapper" id="carouselWrapper">
-                </div>
+                <!-- JS inyecta aquí -->
+            </div>
             <div class="carousel-controls">
                 <button class="carousel-button" id="prevBtn">‹</button>
                 <button class="carousel-button" id="nextBtn">›</button>
@@ -208,6 +380,7 @@
         <div class="carousel-dots" id="carouselDots"></div>
     </section>
 
+    <!-- Floating Buttons -->
     <div class="floating-buttons">
         <a href="https://www.instagram.com/amelia_vajilla_vintage/" target="_blank" class="float-btn btn-instagram" aria-label="Instagram">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.5 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
@@ -217,8 +390,9 @@
         </a>
     </div>
 
+    <!-- Reviews Section -->
     <section id="reseñas" class="reviews-section">
-        <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+        <h2 class="section-title">Clientes Felices</h2>
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="review-header">
@@ -241,38 +415,24 @@
                 </div>
                 <p class="review-text">"Organicé el baby shower de mi hermana y las vajillas rosadas fueron el complemento perfecto. Todo impecable."</p>
             </div>
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="review-avatar">R</div>
-                    <div class="review-info"><h4>Roberto Díaz</h4><div class="review-stars">★★★★★</div></div>
-                </div>
-                <p class="review-text">"La atención al detalle es extraordinaria. Cada pieza cuenta una historia y la combinación con los manteles creó magia."</p>
-            </div>
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="review-avatar">S</div>
-                    <div class="review-info"><h4>Sofía Ramírez</h4><div class="review-stars">★★★★★</div></div>
-                </div>
-                <p class="review-text">"Calidad premium a precio justo. Las vajillas llegaron perfectamente embaladas. ¡Altamente recomendado!"</p>
-            </div>
-            <div class="review-card">
-                <div class="review-header">
-                    <div class="review-avatar">J</div>
-                    <div class="review-info"><h4>Jorge Fernández</h4><div class="review-stars">★★★★★</div></div>
-                </div>
-                <p class="review-text">"Evento de 150 personas y todo fue perfecto. La coordinación y entrega excepcionales. La mejor opción."</p>
-            </div>
+            <!-- Más reseñas si se desean -->
         </div>
     </section>
 
+    <!-- Footer con Logo Oscuro -->
     <footer id="contacto">
-        <p>&copy; 2026 Amelia Vajillas. Todos los derechos reservados.</p>
-        <p>📞 Contacto: +54 9 387 613-8496| 📧 info@ameliavajillas.com</p>
+        <!-- Logo Oscuro sobre fondo Negro -->
+        <img src="logo.png" alt="Amelia Logo Footer" class="footer-logo">
+        
+        <div class="footer-contact">
+            <p>&copy; 2026 Amelia Vajillas. Todos los derechos reservados.</p>
+            <p>📞 +54 9 387 613-8496 | 📧 info@ameliavajillas.com</p>
+        </div>
     </footer>
 
     <script>
         // ========================================
-        // CONFIGURACIÓN (COMPLETA)
+        // CONFIGURACIÓN
         // ========================================
         const CONFIG = {
             whatsappNumber: '5493876138496',
@@ -344,7 +504,7 @@
                 });
 
                 this.startAutoPlay();
-                this.updateFloatingButton(); // Set inicial
+                this.updateFloatingButton(); 
             },
 
             createDots() {
@@ -366,7 +526,7 @@
                 document.querySelectorAll('.dot').forEach((dot, index) => {
                     dot.classList.toggle('active', index === this.currentIndex);
                 });
-                this.updateFloatingButton(); // Actualiza WhatsApp al cambiar
+                this.updateFloatingButton(); 
             },
 
             updateFloatingButton() {
@@ -383,7 +543,6 @@
             resetAutoPlay() { clearInterval(this.autoPlayInterval); this.startAutoPlay(); }
         };
 
-        // INICIALIZACIÓN LIMPIA (SIN DUPLICADOS)
         document.addEventListener('DOMContentLoaded', () => {
             renderCollections();
             Carousel.init();
