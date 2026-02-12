@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amelia Vajillas Vintage</title>
+    <style>
+        /* ========================================
+           VARIABLES DE CONFIGURACIÓN
+           ======================================== */
+        :root {
+            --color-primary: #8b7355;
+            --color-primary-dark: #6b5d52;
+            --color-accent: #d4af37;
+            --whatsapp-number: '5493874567890'; 
+            --instagram-user: 'ameliavajillas';
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 80px; /* Espacio extra para los botones flotantes en móvil */
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #8b7355 0%, #6b5d52 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.8rem; font-weight: bold; letter-spacing: 2px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(rgba(139, 115, 85, 0.85), rgba(107, 93, 82, 0.9)), 
+                        url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"%3E%3Cdefs%3E%3ClinearGradient id="marble" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23f5f3ef;stop-opacity:1" /%3E%3Cstop offset="50%25" style="stop-color:%23ebe8e1;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%23d9d4cc;stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill="url(%23marble)" width="1200" height="800"/%3E%3Cpath d="M0,200 Q300,250 600,200 T1200,200" fill="none" stroke="%23c9c3ba" stroke-width="2" opacity="0.3"/%3E%3Cpath d="M0,400 Q400,350 800,400 T1200,400" fill="none" stroke="%23c9c3ba" stroke-width="2" opacity="0.3"/%3E%3Cpath d="M200,0 Q250,300 200,600 T200,800" fill="none" stroke="%23c9c3ba" stroke-width="2" opacity="0.2"/%3E%3Cpath d="M800,0 Q750,300 800,600 T800,800" fill="none" stroke="%23c9c3ba" stroke-width="2" opacity="0.2"/%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.3rem; max-width: 700px; margin: 0 auto 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        .cta-button {
+            display: inline-block; padding: 1rem 2.5rem; background: white; color: #8b7355;
+            text-decoration: none; border-radius: 50px; font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+
+        /* Carousel Section */
+        .carousel-section { padding: 0; background: linear-gradient(135deg, #f5f3ef 0%, #ebe8e1 100%); }
+        .section-title { text-align: center; font-size: 2.5rem; padding: 3rem 1rem 1rem; margin-bottom: 0; color: #8b7355; }
+
+        .carousel-container {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .carousel-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-item { min-width: 100%; position: relative; }
+
+        /* --- MEJORA: IMAGEN MÁS GRANDE EN MÓVIL (70vh) --- */
+        .carousel-item img {
+            width: 100%;
+            height: 70vh; /* Ocupa el 70% de la altura del celular */
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: white; padding: 4rem 2rem 3rem; /* Más padding arriba para degradado suave */
+        }
+        .carousel-caption h3 { font-size: 2rem; margin-bottom: 0.5rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .carousel-caption p { font-size: 1.1rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+
+        /* Botones del Carrusel */
+        .carousel-controls {
+            position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between;
+            transform: translateY(-50%); padding: 0 1rem; pointer-events: none;
+        }
+        .carousel-button {
+            pointer-events: auto; background: rgba(255,255,255,0.7); border: none; width: 50px; height: 50px;
+            border-radius: 50%; cursor: pointer; font-size: 1.5rem; color: #8b7355; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .carousel-button:hover { background: white; transform: scale(1.1); }
+
+        .carousel-dots { text-align: center; padding: 1rem 0 3rem; }
+        .dot {
+            display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+            background: #ccc; margin: 0 5px; cursor: pointer; transition: all 0.3s;
+        }
+        .dot.active { background: #8b7355; transform: scale(1.3); }
+
+        /* ========================================
+           BOTONES FLOTANTES (REDES) - NUEVO
+           ======================================== */
+        .floating-buttons {
+            position: fixed; bottom: 20px; right: 20px; z-index: 2000;
+            display: flex; flex-direction: column; gap: 15px;
+        }
+        .float-btn {
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; text-decoration: none;
+        }
+        .float-btn:hover { transform: scale(1.1); }
+        .float-btn svg { width: 32px; height: 32px; fill: white; }
+        .btn-whatsapp { background-color: #25D366; }
+        .btn-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+
+        /* Reviews Section */
+        .reviews-section { padding: 5rem 2rem; background: linear-gradient(135deg, #faf9f7 0%, #f0ede8 100%); }
+        .reviews-grid {
+            max-width: 1200px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+        }
+        .review-card {
+            background: white; padding: 2rem; border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: transform 0.3s;
+        }
+        .review-card:hover { transform: translateY(-5px); }
+        .review-header { display: flex; align-items: center; margin-bottom: 1rem; }
+        .review-avatar {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: linear-gradient(135deg, #8b7355 0%, #6b5d52 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.5rem; font-weight: bold; margin-right: 1rem;
+        }
+        .review-stars { color: #ffd700; font-size: 1.1rem; margin-left: auto; }
+        .review-text { color: #666; font-style: italic; line-height: 1.8; }
+
+        /* Footer */
+        footer { background: #333; color: white; text-align: center; padding: 3rem 2rem 6rem; }
+        .social-links { margin-top: 1rem; }
+        .social-links a { color: white; margin: 0 1rem; text-decoration: none; }
+
+        /* Responsive */
+        @media (min-width: 1025px) {
+            .carousel-item img { height: 700px; /* Altura fija en escritorio para no ocupar toda la pantalla */ }
+            .carousel-caption { width: 50%; background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); height: 100%; display: flex; flex-direction: column; justify-content: center; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Menú simplificado */
+            .hero h1 { font-size: 2.5rem; }
+            .carousel-button { width: 40px; height: 40px; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AMELIA VAJILLAS</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#vajillas">Vajillas</a></li>
+                <li><a href="#reseñas">Reseñas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <h1>Amelia Vajillas</h1>
+        <p>Vajillas vintage elegantes y manteles de lujo para hacer de tu evento una experiencia inolvidable.</p>
+        <a href="#vajillas" class="cta-button">Ver Colección</a>
+    </section>
+
+    <section id="vajillas" class="carousel-section">
+        <h2 class="section-title">Nuestra Colección</h2>
+        <div class="carousel-container">
+            <div class="carousel-wrapper" id="carouselWrapper">
+                </div>
+            <div class="carousel-controls">
+                <button class="carousel-button" id="prevBtn">‹</button>
+                <button class="carousel-button" id="nextBtn">›</button>
+            </div>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+    </section>
+
+    <div class="floating-buttons">
+        <a href="https://www.instagram.com/amelia_vajilla_vintage/" target="_blank" class="float-btn btn-instagram" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.5 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+        </a>
+        <a href="#" id="waButtonGlobal" target="_blank" class="float-btn btn-whatsapp" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+        </a>
+    </div>
+
+    <section id="reseñas" class="reviews-section">
+        <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">M</div>
+                    <div class="review-info"><h4>María González</h4><div class="review-stars">★★★★★</div></div>
+                </div>
+                <p class="review-text">"Las vajillas de Amelia transformaron completamente mi boda. La elegancia y calidad superó todas mis expectativas."</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">C</div>
+                    <div class="review-info"><h4>Carlos Mendoza</h4><div class="review-stars">★★★★★</div></div>
+                </div>
+                <p class="review-text">"Excelente servicio para nuestro evento corporativo. La vajilla vintage le dio un toque de distinción único."</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">L</div>
+                    <div class="review-info"><h4>Laura Sánchez</h4><div class="review-stars">★★★★★</div></div>
+                </div>
+                <p class="review-text">"Organicé el baby shower de mi hermana y las vajillas rosadas fueron el complemento perfecto. Todo impecable."</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">R</div>
+                    <div class="review-info"><h4>Roberto Díaz</h4><div class="review-stars">★★★★★</div></div>
+                </div>
+                <p class="review-text">"La atención al detalle es extraordinaria. Cada pieza cuenta una historia y la combinación con los manteles creó magia."</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">S</div>
+                    <div class="review-info"><h4>Sofía Ramírez</h4><div class="review-stars">★★★★★</div></div>
+                </div>
+                <p class="review-text">"Calidad premium a precio justo. Las vajillas llegaron perfectamente embaladas. ¡Altamente recomendado!"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">J</div>
+                    <div class="review-info"><h4>Jorge Fernández</h4><div class="review-stars">★★★★★</div></div>
+                </div>
+                <p class="review-text">"Evento de 150 personas y todo fue perfecto. La coordinación y entrega excepcionales. La mejor opción."</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <p>&copy; 2026 Amelia Vajillas. Todos los derechos reservados.</p>
+        <p>📞 Contacto: +54 9 387 613-8496| 📧 info@ameliavajillas.com</p>
+    </footer>
+
+    <script>
+        // ========================================
+        // CONFIGURACIÓN (COMPLETA)
+        // ========================================
+        const CONFIG = {
+            whatsappNumber: '5493876138496',
+            collections: [
+                { name: 'Colección Dorada', description: 'Porcelana fina con detalles en oro, perfecta para bodas y eventos de gala' },
+                { name: 'Colección Azul Vintage', description: 'Diseño clásico con tonos azules, ideal para eventos al aire libre' },
+                { name: 'Colección Rosada', description: 'Delicados detalles florales en tonos rosa, perfecta para baby showers' },
+                { name: 'Colección Art Deco', description: 'Líneas geométricas elegantes, ideal para eventos corporativos' },
+                { name: 'Colección Jardín', description: 'Motivos botánicos y naturales, perfecta para eventos campestres' }
+            ]
+        };
+
+        // Generador SVG (Todos los modelos originales)
+        const SVGGenerator = {
+            collections: [
+                `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23f8f4ef' width='1200' height='600'/%3E%3Ccircle cx='600' cy='300' r='200' fill='%23fff' stroke='%23d4af37' stroke-width='3'/%3E%3Ccircle cx='600' cy='300' r='180' fill='none' stroke='%23d4af37' stroke-width='2'/%3E%3Cpath d='M 500 300 Q 600 250 700 300' fill='none' stroke='%23d4af37' stroke-width='2'/%3E%3C/svg%3E`,
+                `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23e8f5f7' width='1200' height='600'/%3E%3Crect x='400' y='150' width='400' height='300' fill='%23fff' stroke='%2370a9c7' stroke-width='3'/%3E%3Cline x1='400' y1='200' x2='800' y2='200' stroke='%2370a9c7' stroke-width='2'/%3E%3Cline x1='400' y1='400' x2='800' y2='400' stroke='%2370a9c7' stroke-width='2'/%3E%3Ccircle cx='500' cy='300' r='40' fill='%2370a9c7' opacity='0.3'/%3E%3Ccircle cx='700' cy='300' r='40' fill='%2370a9c7' opacity='0.3'/%3E%3C/svg%3E`,
+                `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23fff5f5' width='1200' height='600'/%3E%3Ccircle cx='600' cy='300' r='200' fill='%23fff' stroke='%23ff69b4' stroke-width='3'/%3E%3Cpath d='M 550 250 Q 600 200 650 250 Q 600 300 550 250' fill='%23ff69b4' opacity='0.3'/%3E%3Cpath d='M 550 350 Q 600 300 650 350 Q 600 400 550 350' fill='%23ff69b4' opacity='0.3'/%3E%3C/svg%3E`,
+                `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23f5f5f0' width='1200' height='600'/%3E%3Ccircle cx='600' cy='300' r='200' fill='%23fff' stroke='%234a4a4a' stroke-width='3'/%3E%3Cline x1='500' y1='250' x2='700' y2='250' stroke='%234a4a4a' stroke-width='2'/%3E%3Cline x1='500' y1='300' x2='700' y2='300' stroke='%234a4a4a' stroke-width='2'/%3E%3Cline x1='500' y1='350' x2='700' y2='350' stroke='%234a4a4a' stroke-width='2'/%3E%3C/svg%3E`,
+                `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23f0f8f0' width='1200' height='600'/%3E%3Ccircle cx='600' cy='300' r='200' fill='%23fff' stroke='%23228b22' stroke-width='3'/%3E%3Cpath d='M 580 280 Q 600 260 620 280 L 620 320 Q 600 340 580 320 Z' fill='%23228b22' opacity='0.4'/%3E%3Cpath d='M 650 260 Q 670 240 690 260 L 690 300 Q 670 320 650 300 Z' fill='%23228b22' opacity='0.4'/%3E%3C/svg%3E`
+            ]
+        };
+
+        function renderCollections() {
+            const wrapper = document.getElementById('carouselWrapper');
+            wrapper.innerHTML = '';
+            CONFIG.collections.forEach((collection, index) => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.innerHTML = `
+                    <img src="${SVGGenerator.collections[index]}" alt="${collection.name}">
+                    <div class="carousel-caption">
+                        <h3>${collection.name}</h3>
+                        <p>${collection.description}</p>
+                    </div>
+                `;
+                wrapper.appendChild(item);
+            });
+        }
+
+        const Carousel = {
+            wrapper: document.getElementById('carouselWrapper'),
+            dotsContainer: document.getElementById('carouselDots'),
+            currentIndex: 0,
+            totalItems: 0,
+            autoPlayInterval: null,
+
+            init() {
+                this.totalItems = CONFIG.collections.length;
+                this.createDots();
+                
+                document.getElementById('nextBtn').addEventListener('click', () => {
+                    this.nextSlide();
+                    this.resetAutoPlay();
+                });
+                document.getElementById('prevBtn').addEventListener('click', () => {
+                    this.prevSlide();
+                    this.resetAutoPlay();
+                });
+
+                // Swipe Táctil
+                let touchStartX = 0;
+                let touchEndX = 0;
+                this.wrapper.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+                this.wrapper.addEventListener('touchend', e => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    if (touchStartX - touchEndX > 50) this.nextSlide(); 
+                    if (touchEndX - touchStartX > 50) this.prevSlide(); 
+                });
+
+                this.startAutoPlay();
+                this.updateFloatingButton(); // Set inicial
+            },
+
+            createDots() {
+                this.dotsContainer.innerHTML = '';
+                for (let i = 0; i < this.totalItems; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => {
+                        this.goToSlide(i);
+                        this.resetAutoPlay();
+                    });
+                    this.dotsContainer.appendChild(dot);
+                }
+            },
+
+            updateCarousel() {
+                this.wrapper.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentIndex);
+                });
+                this.updateFloatingButton(); // Actualiza WhatsApp al cambiar
+            },
+
+            updateFloatingButton() {
+                const currentCollection = CONFIG.collections[this.currentIndex];
+                const waBtn = document.getElementById('waButtonGlobal');
+                const message = encodeURIComponent(`Hola Amelia! Me interesa la ${currentCollection.name} que vi en la web.`);
+                waBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${message}`;
+            },
+
+            goToSlide(index) { this.currentIndex = index; this.updateCarousel(); },
+            nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.totalItems; this.updateCarousel(); },
+            prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.totalItems) % this.totalItems; this.updateCarousel(); },
+            startAutoPlay() { this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000); },
+            resetAutoPlay() { clearInterval(this.autoPlayInterval); this.startAutoPlay(); }
+        };
+
+        // INICIALIZACIÓN LIMPIA (SIN DUPLICADOS)
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCollections();
+            Carousel.init();
+            
+            // Smooth Scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
